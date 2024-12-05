@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{fragment :: parent(~{:: #content} , ~{:: title})}">
+
+<head>
+
+    <title data-th-text="${LoggedInUser.name} + '  |   Profile '">Profile Page</title>
+</head>
+
+<body>
+    <div id="content">
+        <div>
+            <div th:if="${LoggedInUser}">
+                <div data-th-replace="~{userTemplate/sideBar :: user-sidebar}"></div>
+            </div>
+            <div class="pl-64">
+                <div class="flex justify-center flex-col items-center ">
+                    <h1 class="text-5xl mb-3"> This is a Profile Page </h1>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Recusandae
+                        tenetur amet autem iusto! Fugiat laboru amet neque,doloribus aut
+                        possimus officiis ab distinctio magnam qui iusto perferendis maxime!
+                        Delectus,
+                        aperiam.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

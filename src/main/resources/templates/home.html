@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Contact Manager </title>
+  <link rel="stylesheet" data-th-href="@{'/CSS/output.css'}" />
+
+</head>
+
+<body class="bg-gray-900 h-screen flex justify-center items-center">
+  <div class="bg-gray-600 w-1/2 p-10 text-black  ">
+
+
+    <h1 class="text-4xl font-bold text-white text-center" data-th-text="${name}">
+      Welcome to my home page
+    </h1>
+
+    <a class="text-xl  text-white text-center" data-th-href="${youtube}"> Click Here To Open </a>
+    <p>
+      In a quiet corner of the bustling city, where the sounds of honking cars and chatter faded into the background, a
+      small café nestled among towering buildings offered a refuge for weary souls. The aroma of freshly brewed coffee
+      wafted through the air, mingling with the sweet scent of pastries that lined the glass display. Patrons gathered
+      at wooden tables, their laughter and conversations creating a warm atmosphere. Sunlight streamed through the large
+      windows, casting soft shadows that danced on the walls. It was a place where time seemed to stand still, allowing
+      moments of connection and reflection to flourish amid the chaos outside.
+    </p>
+
+    <button class="px-3 py-3 rounded bg-blue-700 text-center text-white ">
+       Confirm 
+    </button>
+
+  </div>
+
+</body>
+
+</html>
