@@ -1,7 +1,6 @@
 package com.SCM.Smart_Contact_Manager.forms;
 
         
-import org.hibernate.validator.constraints.UniqueElements;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

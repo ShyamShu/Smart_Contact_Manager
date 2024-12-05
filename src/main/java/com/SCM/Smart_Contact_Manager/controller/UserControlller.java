@@ -42,12 +42,7 @@ public String viewProfile(Model model , Authentication authentication)
 }
 
 
-// add contacts page 
-@GetMapping("/addContactsPage")
-public String contactsPage()
-{
-    return "addContact";
-}
+
 
 
 // view contacts page
