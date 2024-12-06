@@ -28,7 +28,6 @@ public class RootController {
         if(authentication == null)
         {
             logger.info("Authentication object: {}", authentication);
-
             return;
         }
         try {

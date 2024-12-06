@@ -20,6 +20,8 @@ public class Contact {
     private String phoneNumber;
     private String address;
     private String pictures;
+    private String Linkedin;
+    private String Website;
 
     @Column (length = 1000)
     private String discription ;
