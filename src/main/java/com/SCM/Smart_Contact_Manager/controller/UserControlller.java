@@ -36,8 +36,6 @@ public String viewDashboard()
 @GetMapping("/Profile")
 public String viewProfile(Model model , Authentication authentication)
 {
-   
-    
     return "userTemplate/profile";
 }
 
