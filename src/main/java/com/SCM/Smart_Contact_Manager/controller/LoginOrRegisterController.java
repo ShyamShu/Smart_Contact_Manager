@@ -26,6 +26,9 @@ public class LoginOrRegisterController {
     private UserServices userService;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+
+
+    // for saving the form data of user  in database
 @PostMapping("/do-register")
 public String regiisterHandler(@Valid @ModelAttribute UserForm userform ,BindingResult rBindingResult, HttpSession session) throws Exception  {
       
@@ -35,6 +38,7 @@ public String regiisterHandler(@Valid @ModelAttribute UserForm userform ,Binding
     // validate our form data 
     if(rBindingResult.hasErrors())
     {
+        //if any feild contains error thyen it shows the register successfull
         Message msg =  Message.builder().content("Registration is un Successfull ").type(MessageType.red).build();
         session.setAttribute("message", msg);
         return "register";
@@ -48,11 +52,16 @@ public String regiisterHandler(@Valid @ModelAttribute UserForm userform ,Binding
     .password(userform.getPassword())
     .profilePic("https://images.unsplash.com/photo-1648740366598-7fb7c5e73fa5?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
     .build();
+
+    //saving the user into database
     userService.SaveUser(users);
 
+    //passing the message to page for successfull saving of user
     Message msg =  Message.builder().content("Registration Successfull ").type(MessageType.green).build();
     session.setAttribute("message", msg);
     
+
+    //returning to the api of  home controller (Register)
     return "redirect:/register";
 }
 

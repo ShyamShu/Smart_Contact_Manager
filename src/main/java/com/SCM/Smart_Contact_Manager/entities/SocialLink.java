@@ -3,6 +3,8 @@ package com.SCM.Smart_Contact_Manager.entities;
 
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
@@ -20,7 +22,8 @@ import lombok.Setter;
 public class SocialLink {
 
     @Id
-    private String id;
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String link;
     private String tittle;
 

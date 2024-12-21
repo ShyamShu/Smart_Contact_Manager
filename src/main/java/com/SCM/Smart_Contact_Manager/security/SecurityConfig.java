@@ -43,7 +43,7 @@ public class SecurityConfig {
 
           // setup customy login page and some aother setting to authenticate my user in login page 
           http.formLogin(formLogin ->{
-            formLogin.loginPage("/login")  // setup my custom login page 
+            formLogin.loginPage("/login") // setup my custom login page 
             .loginProcessingUrl("/authenticate")  // using default authenticate end Point to authenticate my user 
             .defaultSuccessUrl("/User/Dashboard" , true) // setting up my after successfull authentication login url that opens after login
             .failureUrl("/login?error=true") // if fails then it goes with this error endpoint 
