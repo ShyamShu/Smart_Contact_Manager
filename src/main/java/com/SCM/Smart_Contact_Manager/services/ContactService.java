@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.SCM.Smart_Contact_Manager.entities.Contact;
+import com.SCM.Smart_Contact_Manager.entities.user;
 import com.SCM.Smart_Contact_Manager.repositories.ContactRepo;
 
 @Service
@@ -79,6 +80,11 @@ public class ContactService {
     public boolean isEmailExists(String email)
     {
        return  contactRepo.existsByEmail(email);
+    }
+
+    public List<Contact> findByUser(user user)
+    {
+        return contactRepo.findByusers(user);
     }
 
      

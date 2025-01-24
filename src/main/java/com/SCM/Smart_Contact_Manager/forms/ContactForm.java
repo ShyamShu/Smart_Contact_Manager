@@ -2,6 +2,8 @@ package com.SCM.Smart_Contact_Manager.forms;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.SCM.Smart_Contact_Manager.validate.ValidFile;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -39,6 +41,8 @@ public class ContactForm {
     private String Website;
     
     private boolean favorite;
+
+    @ValidFile
     private MultipartFile picture;
     
 

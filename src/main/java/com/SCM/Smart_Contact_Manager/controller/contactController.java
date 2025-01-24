@@ -1,5 +1,6 @@
 package com.SCM.Smart_Contact_Manager.controller;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -32,7 +33,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 @Controller
-@RequestMapping("User/Contact")
+@RequestMapping("/User")
 public class contactController {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -101,7 +102,7 @@ public class contactController {
          }
 
         //redirect to the that api that show the addcontact html file 
-        return "redirect:/User/Contact/addContact";
+        return "redirect:/User/addContact";
     }
 
     //Edit the contact API
@@ -112,6 +113,17 @@ public class contactController {
         
         model.addAttribute("contactForm", contactForm);
         return "userTemplate/editContact";
+    }
+
+    @GetMapping("/AllContact")
+    public String allContact(org.springframework.security.core.Authentication authentication , Model model )
+    {
+        String email = helper.getEmailOfLoggedInUser(authentication);
+        user user = userServices.getUserByEmail(email);
+        List<Contact> listcontact = contactService.findByUser(user);
+
+         model.addAttribute("contacts", listcontact);
+        return "userTemplate/allContact";
     }
 
 

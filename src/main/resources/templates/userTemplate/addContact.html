@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{fragment :: parent(~{:: #content} , ~{:: title})}">
+<html lang="en" th:replace="~{fragment :: parent(~{:: #content} , ~{:: title})}" >
 
 <head>
 
@@ -155,14 +155,15 @@
 
                                     <!-- Enter the picture feild  -->
 
-
+                                     <div>
                                     <label class="block mb-4 text-sm font-medium text-gray-900 dark:text-white"
                                         for="file_input">Upload Contact Pic</label>
                                     <input
                                         class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                                         type="file" th:field="*{picture}">
-
-
+                                    </div>
+                                    <p data-th-if="${#fields.hasErrors('picture')}" data-th-errors="*{picture}"
+                                        class="text-red-600  px-1 ml-2"> Image</p>
 
 
                                     <!-- checkbox  -->
@@ -199,6 +200,11 @@
 
         </div>
     </div>
+
+    <script th:src="@{/JS/admin.js}"></script>
+    <script>
+        console.log("it is a add contact page ")
+    </script>
 </body>
 
 </html>
