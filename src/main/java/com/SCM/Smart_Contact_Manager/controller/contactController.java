@@ -1,15 +1,16 @@
 package com.SCM.Smart_Contact_Manager.controller;
 
-import java.util.List;
 import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.SCM.Smart_Contact_Manager.entities.Contact;
 import com.SCM.Smart_Contact_Manager.entities.user;
@@ -105,6 +106,7 @@ public class contactController {
         return "redirect:/User/addContact";
     }
 
+
     //Edit the contact API
     @GetMapping("/editContact")
     public String editContact(Model model)
@@ -115,17 +117,31 @@ public class contactController {
         return "userTemplate/editContact";
     }
 
+
+
+    // provides the all contact list in the page form to display to user
     @GetMapping("/AllContact")
-    public String allContact(org.springframework.security.core.Authentication authentication , Model model )
+    public String allContact(
+        @RequestParam(value = "page"  , defaultValue =  "0") int page,
+        @RequestParam(value = "size" , defaultValue = "6" ) int size,
+        @RequestParam(value = "sortBy" , defaultValue = "name") String sortBy,
+        @RequestParam(value = "direction" , defaultValue = "asc") String direction,
+        org.springframework.security.core.Authentication authentication , Model model )
     {
         String email = helper.getEmailOfLoggedInUser(authentication);
         user user = userServices.getUserByEmail(email);
-        List<Contact> listcontact = contactService.findByUser(user);
+        Page<Contact> pageContact = contactService.findByUser(user, page, size , sortBy , direction);
 
-         model.addAttribute("contacts", listcontact);
+         model.addAttribute("pageContact", pageContact);
         return "userTemplate/allContact";
     }
 
+
+    @GetMapping("/search")
+    public String searchHandler()
+    {
+        return "";
+    }
 
     
 

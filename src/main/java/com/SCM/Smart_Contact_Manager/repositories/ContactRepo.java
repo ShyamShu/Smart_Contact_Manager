@@ -3,6 +3,8 @@ package com.SCM.Smart_Contact_Manager.repositories;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -26,5 +28,8 @@ public interface ContactRepo extends JpaRepository<Contact,String> {
     List<Contact> findByuserId(@Param("userId")String userId);
 
     public boolean existsByEmail(String Email);
+
+    Page<Contact> findByusers(user user , Pageable pageable);
+
 
 }

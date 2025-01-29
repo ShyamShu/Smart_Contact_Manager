@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.SCM.Smart_Contact_Manager.entities.Contact;
@@ -82,10 +84,16 @@ public class ContactService {
        return  contactRepo.existsByEmail(email);
     }
 
-    public List<Contact> findByUser(user user)
+    public List<Contact> findByUser(user user )
     {
         return contactRepo.findByusers(user);
     }
 
+    public Page<Contact> findByUser(user user , int page , int size , String sortBy, String direction )
+    {
+        org.springframework.data.domain.Sort sort = direction.equals("desc") ? org.springframework.data.domain.Sort.by(sortBy).descending() : org.springframework.data.domain.Sort.by(sortBy).ascending();
+        var pageable = PageRequest.of(page, size , sort);
+        return contactRepo.findByusers(user , pageable);
+    }
      
 }

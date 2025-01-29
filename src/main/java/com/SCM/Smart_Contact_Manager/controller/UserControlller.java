@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.SCM.Smart_Contact_Manager.entities.user;
+import com.SCM.Smart_Contact_Manager.helper.helper;
 import com.SCM.Smart_Contact_Manager.services.UserServices;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,8 +36,12 @@ public String viewDashboard()
 
 // user profile page 
 @GetMapping("/Profile")
-public String viewProfile(Model model , Authentication authentication)
+public String viewProfile(Model model , org.springframework.security.core.Authentication authentication)
 {
+    String emailOfUser = helper.getEmailOfLoggedInUser(authentication);
+            user user= userServices.getUserByEmail(emailOfUser);
+            model.addAttribute("user", user);
+            
     return "userTemplate/profile";
 }
 
