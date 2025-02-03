@@ -138,9 +138,42 @@ public class contactController {
 
 
     @GetMapping("/search")
-    public String searchHandler()
+    public String searchHandler(
+        @RequestParam(value = "page"  , defaultValue =  "0") int page,
+        @RequestParam(value = "size" , defaultValue = "6" ) int size,
+        @RequestParam(value = "sortBy" , defaultValue = "name") String sortBy,
+        @RequestParam(value = "direction" , defaultValue = "asc") String direction,
+        @RequestParam("field") String field,
+        @RequestParam("keyword") String word,
+        Model model,
+        org.springframework.security.core.Authentication authentication
+    )
     {
-        return "";
+        String email = helper.getEmailOfLoggedInUser(authentication);
+        user user = userServices.getUserByEmail(email);
+        logger.info("log comming form contact controller with search method");
+        logger.info("field = " + field);
+        logger.info("keyword = " + word);
+
+        Page<Contact> pageContact = null;
+        if(field.equalsIgnoreCase("Name"))
+        {
+            logger.info("name search is called");
+           pageContact = contactService.searchName(word, page, size, sortBy, direction ,  user);
+        }
+        else if(field.equalsIgnoreCase("Email"))
+        {
+            logger.info("email search is called");
+           pageContact = contactService.searchEmail(word, page, size, sortBy, direction ,  user);
+        }
+        else{
+            logger.info("phone search is called");
+            pageContact = contactService.searchPhoneNo(word, page, size, sortBy, direction ,  user);
+        }
+
+        logger.info("pageContact + {}" , pageContact.getContent());
+        model.addAttribute("searchPageContact", pageContact);
+        return "userTemplate/search";
     }
 
     

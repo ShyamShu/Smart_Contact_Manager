@@ -23,7 +23,7 @@ public class helper {
                 else 
                 {
                    System.out.println("login with github ");
-                   return (user.getAttribute("email") != null ?  user.getAttribute("email") : user.getAttribute("login".toString() + "@email.com"));
+                   return ( (user.getAttribute("email") != null ? user.getAttribute("email").toString() : user.getAttribute("login").toString() + "@gmail.com"));
                 }
         }
         else{

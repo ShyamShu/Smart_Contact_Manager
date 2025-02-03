@@ -36,13 +36,14 @@ public class oAuthSuccessHandler implements AuthenticationSuccessHandler {
                 var authoriztionProvider = (OAuth2AuthenticationToken)authentication;
                 String provider = authoriztionProvider.getAuthorizedClientRegistrationId();
             
-                logger.info(provider);
+                logger.info("provider : {}" , provider);
 
                 // Creating  a default OAuth user that conatin all the neccesary credentials like name an all the stuff that goes into my nackend database
                 DefaultOAuth2User user  = (DefaultOAuth2User)authentication.getPrincipal();
 
                 // Printing the data into logs for testing that confirs user is arived here 
                
+                logger.info(" my incomming data from ");
                 user.getAttributes().forEach((key,value)->{
                 logger.info("{}:{}" , key,value);
                 });
@@ -54,7 +55,7 @@ public class oAuthSuccessHandler implements AuthenticationSuccessHandler {
                 user2.setEnabled(true);
                 user2.setPassword("123456");
                 String email = (user.getAttribute("email") != null ? user.getAttribute("email").toString() : user.getAttribute("login").toString() + "@gmail.com");
-
+                logger.info(" email of incooming user in oauth success handler : {}" , email);
                 // check the authorizatiom method is google 
                 if(provider.equalsIgnoreCase("google"))
                 {
@@ -74,7 +75,7 @@ public class oAuthSuccessHandler implements AuthenticationSuccessHandler {
                 {
                   // add the constraint which are comes from github authentication 
                     user2.setName(user.getAttribute("login").toString());
-                    user2.setEmail(user.getAttribute("email") != null ?  user.getAttribute("email") : user.getAttribute("login".toString() + "@email.com"));
+                    user2.setEmail(email);
                     user2.setProfilePic(user.getAttribute("avatar_url").toString());
                     user2.setProviderID(Providers.GITHUB.toString());
                     user2.setEmailVerified(false);   
@@ -90,7 +91,7 @@ public class oAuthSuccessHandler implements AuthenticationSuccessHandler {
                 {
                   // Saving the user in database that create above here 
                   userRepo.save(user2);
-                  logger.info("  user is saved with this email" + user.getAttribute("email").toString());
+                  logger.info("  user is saved with this email" + user2.getEmail());
                 }
                 else{
                   logger.info(" there is a existing user with this email");
